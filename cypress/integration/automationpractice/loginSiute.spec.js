@@ -1,30 +1,34 @@
 /// <reference types="cypress"/>
 
-import {HomePage} from "../../support/page_objects/homePage";
+import {homePage} from "../../support/page_objects/homePage";
+import {loginPage} from "../../support/page_objects/loginPage";
+import {accountPage} from "../../support/page_objects/accountPage";
 
 describe('Login suite', () => {
 
-  const email = 'tt2857506@gmail.com'
-  const password = 'testtest2857506'
-  const wrongPassword = 'testtest'
+  let data = {}
+
+  before(() => {
+    cy.fixture('testData').then(testData => {
+      data = testData;
+    })
+  })
 
   beforeEach(() => {
     cy.openHomePage()
   })
 
   it('should be logined', () => {
-    const homePage = new HomePage()
-    const loginPage = homePage.navigateToLoginPage()
-    const accountPage = loginPage.login(email, password)
+    homePage.navigateToLoginPage()
+    loginPage.login(data.email, data.password)
     accountPage.getMyAccountTitle().should('to.be.visible')
   })
 
   it('should not be logined with wrong password', () => {
-    const homePage = new HomePage()
-    const loginPage = homePage.navigateToLoginPage()
-    loginPage.typeEmail(email)
-    loginPage.typePassword(wrongPassword)
-    loginPage.submitLogin()
+    homePage.navigateToLoginPage()
+    loginPage.typeEmail(data.email)
+      .typePassword(data.wrongPassword)
+      .submitLogin()
     loginPage.getErrorMessage().should('to.be.visible')
   })
 

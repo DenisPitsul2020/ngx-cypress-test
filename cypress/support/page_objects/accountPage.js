@@ -1,3 +1,4 @@
+
 export class AccountPage {
 
   getMyAccountTitle() {
@@ -5,3 +6,5 @@ export class AccountPage {
   }
 
 }
+
+export const accountPage = new AccountPage()

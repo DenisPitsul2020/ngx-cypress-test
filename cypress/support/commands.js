@@ -23,10 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-<<<<<<< HEAD
 
 Cypress.Commands.add('openHomePage', () => {
   cy.visit('/')
 })
-=======
->>>>>>> b45788244479aefa52bbb04b613cf872e246753a

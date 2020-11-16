@@ -1,13 +1,14 @@
-import {AccountPage} from "./accountPage";
 
 export class LoginPage {
 
   typeEmail(email) {
     cy.get('#email').type(email)
+    return this;
   }
 
   typePassword(password) {
     cy.get('#passwd').type(password)
+    return this;
   }
 
   submitLogin() {
@@ -18,7 +19,6 @@ export class LoginPage {
     this.typeEmail(email)
     this.typePassword(password)
     this.submitLogin()
-    return new AccountPage()
   }
 
   getErrorMessage() {
@@ -26,3 +26,5 @@ export class LoginPage {
   }
 
 }
+
+export const loginPage = new LoginPage()
